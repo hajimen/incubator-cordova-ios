@@ -94,7 +94,12 @@
 	
 	NSString* jsCallback = [NSString stringWithFormat:@"window.__defineGetter__('orientation',function(){ return %d; }); PhoneGap.fireEvent('orientationchange', window);",i];
 	[webView stringByEvaluatingJavaScriptFromString:jsCallback];
-	 
+
+    [webView stringByEvaluatingJavaScriptFromString:
+     [NSString stringWithFormat:
+      @"document.querySelector('meta[name=viewport]').setAttribute('content', 'width=%d;', false); ",
+      (int)webView.frame.size.width]];
+
 }
 
 - (void) dealloc
