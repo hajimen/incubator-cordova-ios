@@ -51,6 +51,9 @@
 - (void)applicationWillResignActive:(UIApplication *)application;
 - (void)applicationWillTerminate:(UIApplication *)application;
 
+- (void)didRotateFromInterfaceOrientation: (UIInterfaceOrientation)fromInterfaceOrientation;
+- (NSString *)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation) interfaceOrientation;
+
 @end
 
 @interface NSDictionary (LowercaseKeys)

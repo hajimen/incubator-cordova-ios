@@ -386,6 +386,7 @@ BOOL gSplashScreenShown = NO;
     self.pluginsMap = [pluginsDict dictionaryWithLowercaseKeys];
     
     self.viewController = [[[PhoneGapViewController alloc] init] autorelease];
+    self.viewController.appDelegate = self;
     
     NSNumber *enableLocation       = [self.settings objectForKey:@"EnableLocation"];
     NSString *enableViewportScale  = [self.settings objectForKey:@"EnableViewportScale"];
@@ -773,6 +774,15 @@ BOOL gSplashScreenShown = NO;
     [fullMethodName release];
     
     return retVal;
+}
+
+- (NSString *)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation) interfaceOrientation 
+{
+    return @"";
+}
+
+- (void)didRotateFromInterfaceOrientation: (UIInterfaceOrientation)fromInterfaceOrientation
+{
 }
 
 /*

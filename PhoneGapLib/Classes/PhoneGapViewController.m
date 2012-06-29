@@ -11,7 +11,7 @@
 
 @implementation PhoneGapViewController
 
-@synthesize supportedOrientations, webView;
+@synthesize supportedOrientations, webView, appDelegate;
 
 - (id) init
 {
@@ -52,7 +52,14 @@
 	{
 		return [res boolValue];
 	}
-	
+
+	// ask appDelegate 
+    res = [self.appDelegate shouldAutorotateToInterfaceOrientation:interfaceOrientation];
+	if([res length] > 0)
+	{
+		return [res boolValue];
+	}
+
 	// if js did not handle the new orientation ( no return value ) we will look it up in the plist -jm
 	
 	BOOL autoRotate = [self.supportedOrientations count] > 0; // autorotate if only more than 1 orientation supported
@@ -95,10 +102,7 @@
 	NSString* jsCallback = [NSString stringWithFormat:@"window.__defineGetter__('orientation',function(){ return %d; }); PhoneGap.fireEvent('orientationchange', window);",i];
 	[webView stringByEvaluatingJavaScriptFromString:jsCallback];
 
-    [webView stringByEvaluatingJavaScriptFromString:
-     [NSString stringWithFormat:
-      @"document.querySelector('meta[name=viewport]').setAttribute('content', 'width=%d;', false); ",
-      (int)webView.frame.size.width]];
+    [self.appDelegate didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 
 }
 

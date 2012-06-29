@@ -8,12 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
+#import "PhoneGapDelegate.h"
 
 @interface PhoneGapViewController : UIViewController {
 }
 
 @property (nonatomic, retain) 	NSArray* supportedOrientations;
 @property (nonatomic, retain)	UIWebView* webView;
+@property (nonatomic, retain)   PhoneGapDelegate *appDelegate;
 
 
 @end
